@@ -4,18 +4,19 @@
 #and fits well with the Docker approach
 #
 FROM debian:sid-slim
+ARG version=0.5.2.40
 
 LABEL maintainer="Ayane Satomi <chinodesuuu@gmail.com>"
 
 RUN apt update && \
-    apt -y install openjdk-11-jre-headless openjdk-11-jdk-headless wget
+    apt -y install --no-install-recommends openjdk-11-jre-headless openjdk-11-jdk-headless wget
 
 RUN mkdir /minecraft
 
 WORKDIR /minecraft
 
-RUN wget -o fabric-installer.jar https://maven.fabricmc.net/net/fabricmc/fabric-installer/0.5.2.40/fabric-installer-0.5.2.40.jar && \
-    java -jar fabric-installer.jar server -downloadMinecraft
+RUN wget https://maven.fabricmc.net/net/fabricmc/fabric-installer/${version}}/fabric-installer-${version}.jar && \
+    java -jar fabric-installer-${version}.jar server -downloadMinecraft
 
 RUN mkdir /minecraft/plugins && mkdir /world
 
