@@ -24,7 +24,6 @@ RUN mkdir /world
 ADD mods ./
 ADD run ./
 
-ENTRYPOINT [ "dumb-init" ]
+ENTRYPOINT [ "./run" ]
 # HACK: OpenJDK can't find fabric in its own shell so we'll need to invoke sh itself to do so
-CMD ["./run"]
 EXPOSE 25565
