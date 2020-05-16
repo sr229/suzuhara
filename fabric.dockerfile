@@ -9,7 +9,7 @@ ARG version=0.5.2.40
 LABEL maintainer="Ayane Satomi <chinodesuuu@gmail.com>"
 
 RUN apt update && \
-    apt -y install wget
+    apt -y install wget dumb-init
 
 RUN mkdir /minecraft
 
@@ -23,6 +23,7 @@ RUN mkdir /world
 
 ADD mods ./
 
+ENTRYPOINT [ "dumb-init" ]
 # HACK: OpenJDK can't find fabric in its own shell so we'll need to invoke sh itself to do so
 CMD sh -c "java ‑jar fabric-server-launch.jar nogui"
 EXPOSE 25565
