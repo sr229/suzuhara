@@ -10,9 +10,6 @@ metadata:
   labels:
     app: fabric-suzuhara-beta
     namespace: minecraft
-    annotations:
-      mc.suzuhara.moe/deployment: minecraft
-      mc.suzuhara.moe/stage: beta
 spec:
   replicas: 1
   selector:
@@ -25,21 +22,28 @@ spec:
     spec:
       containers:
       - name: fabric-suzuhara-beta
-        image: docker.pkg.github.com/sr229/suzuhara/suzuhara-mc:master
+        image: chinodesuuu/suzuhara-mc:master
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "500m"
+          limits:
+            memory: "3Gi"
+            cpu: "2500m"
         ports:
         - containerPort: 25565
         volumeMounts:
-           - name: mc-config
-             mountPath: /minecraft/server.properties
-           - name: world-pvc
-             mountPath: /world
-      volumes:
         - name: mc-config
-          configMap:
-            name: fabric-suzuhara-config
-        - name: world-pvc 
-          persistentVolumeClaim:
-             claimName: world-pvc
+          mountPath: /minecraft/server.properties
+        - name: world-pvc
+          mountPath: /world
+      volumes:
+      - name: mc-config
+        configMap:
+          name: fabric-suzuhara-config
+      - name: world-pvc
+        persistentVolumeClaim:
+          claimName: world-pvc
 ---
 apiVersion: v1
 kind: Service

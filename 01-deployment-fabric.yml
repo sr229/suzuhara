@@ -10,9 +10,6 @@ metadata:
   labels:
     app: fabric-suzuhara
     namespace: minecraft
-    annotations:
-      mc.suzuhara.moe/deployment: minecraft
-      mc.suzuhara.moe/stage: beta
 spec:
   replicas: 1
   selector:
@@ -25,21 +22,21 @@ spec:
     spec:
       containers:
       - name: fabric-suzuhara
-        image: docker.pkg.github.com/sr229/suzuhara/suzuhara-mc:v1.0.0
+        image: chinodesuuu/suzuhara-mc:v1.0.0
         ports:
         - containerPort: 25565
         volumeMounts:
-           - name: mc-config
-             mountPath: /minecraft/server.properties
-           - name: world-pvc
-             mountPath: /world
-      volumes:
         - name: mc-config
-          configMap:
-            name: fabric-suzuhara-config
-        - name: world-pvc 
-          persistentVolumeClaim:
-             claimName: world-pvc
+          mountPath: /minecraft/server.properties
+        - name: world-pvc
+          mountPath: /world
+      volumes:
+      - name: mc-config
+        configMap:
+          name: fabric-suzuhara-config
+      - name: world-pvc
+        persistentVolumeClaim:
+          claimName: world-pvc
 ---
 apiVersion: v1
 kind: Service
