@@ -18,9 +18,9 @@ WORKDIR /minecraft
 RUN wget https://maven.fabricmc.net/net/fabricmc/fabric-installer/${version}/fabric-installer-${version}.jar && \
     java -jar fabric-installer-${version}.jar server -downloadMinecraft
 
-RUN mkdir /minecraft/plugins && mkdir /world
+RUN mkdir /world
 
 ADD mods ./
 
-CMD java ‑jar fabric-server-launch.jar nogui
+CMD java ‑jar /minecraft/fabric-server-launch.jar nogui
 EXPOSE 25565
