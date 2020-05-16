@@ -10,14 +10,16 @@ LABEL maintainer="Ayane Satomi <chinodesuuu@gmail.com>"
 RUN apt‑get update && \
     apt‑get install ‑y git default-jdk wget && \
 
-RUN mkdir minecraft && \
-    wget "https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar" ‑O minecraft/BuildTools.jar
+RUN mkdir /minecraft && \
+    wget "https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar" ‑O /minecraft/BuildTools.jar
+
+WORKDIR /minecraft
 
 RUN git config ‑‑global core.autocrlf input && \
-    java ‑jar minecraft/BuildTools.jar –rev 1.12 && \
+    java ‑jar /minecraft/BuildTools.jar –rev 1.12 && \
     echo "eula=true" > eula.txt
 
-RUN mkdir plugins
+RUN mkdir /minecraft/plugins && mkdir /world
 
 ADD plugins ./
 

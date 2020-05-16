@@ -40,7 +40,7 @@ data:
     use-native-transport=true
     op-permission-level=4
     allow-nether=true
-    level-name=mcallister
+    level-name=konlulu
     enable-query=false
     allow-flight=false
     prevent-proxy-connections=false
@@ -48,7 +48,7 @@ data:
     max-world-size=29999984
     level-type=DEFAULT
     enable-rcon=false
-    level-seed=mcallister
+    level-seed=konlulu
     force-gamemode=false
     server-ip=
     network-compression-threshold=256

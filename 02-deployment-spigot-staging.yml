@@ -33,6 +33,7 @@ spec:
         configMap:
           name: spigot-suzuhara-config
       - name: world
+        mountPath: /world
         persistentVolumeClaim:
           claimName: world-pvc
 ---
