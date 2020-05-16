@@ -14,6 +14,7 @@ Keep in mind we didn't test this for other configurations, so this may not work 
 
 If you're here requesting a plugin from our Minecraft server, please drop your PR here for the plugins directory. Keep in mind that your plugin must meet the following conditions:
 
+- It must be Fabric API (we use Fabric)
 - It must be Open Source (Please link the plugin to your PR's message.)
 - It must be prebuilt when committed to the plugins directory.
 

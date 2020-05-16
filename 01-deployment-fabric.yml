@@ -6,32 +6,32 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: spigot-suzuhara-deployment
+  name: fabric-suzuhara-deployment
   labels:
-    app: spigot-suzuhara
+    app: fabric-suzuhara
     namespace: minecraft
     annotations:
       mc.suzuhara.moe/deployment: minecraft
       mc.suzuhara.moe/stage: stable
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
-      app: spigot-suzuhara
+      app: fabric-suzuhara
   template:
     metadata:
       labels:
-        app: spigot-suzuhara
+        app: fabric-suzuhara
     spec:
       containers:
-      - name: spigot-suzuhara
+      - name: fabric-suzuhara
         image: chinodesuuuu/suzuhara-mc:v1.0.0
         ports:
         - containerPort: 25565
     volumes:
       - name: mc-config
         configMap:
-          name: spigot-suzuhara-config
+          name: fabric-suzuhara-config
       - name: world
         mountPath: /world
         persistentVolumeClaim:
@@ -40,14 +40,14 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: spigot-suzuhara-service
+  name: fabric-suzuhara-service
   namespace: minecraft
   annotations:
      mc.suzuhara.moe/deployment: minecraft
      mc.suzuhara.moe/stage: stable
 spec:
   selector:
-    app: spigot-suzuhara
+    app: fabric-suzuhara
   ports:
     - protocol: TCP
       port: 25565
@@ -56,7 +56,7 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: spigot-suzuhara-ingress
+  name: fabric-suzuhara-ingress
   namespace: minecraft
   annotations:
     kubernetes.io/ingress.class: traefik
@@ -67,5 +67,5 @@ spec:
        paths:
          - path: /
            backend:
-             serviceName: spigot-suzuhara-service
+             serviceName: fabric-suzuhara-service
              servicePort: 25565
