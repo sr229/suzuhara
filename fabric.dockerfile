@@ -8,14 +8,14 @@ FROM debian:sid-slim
 LABEL maintainer="Ayane Satomi <chinodesuuu@gmail.com>"
 
 RUN apt update && \
-    apt -y install default-jdk wget
+    apt -y install openjdk-11-jre-headless openjdk-11-jdk-headless wget
 
-RUN mkdir /minecraft && \
-    wget -o /minecraft/fabric-installer.jar https://maven.fabricmc.net/net/fabricmc/fabric-installer/0.5.2.40/fabric-installer-0.5.2.40.jar
+RUN mkdir /minecraft
 
 WORKDIR /minecraft
 
-RUN java -jar fabric-installer.jar server -downloadMinecraft
+RUN wget -o fabric-installer.jar https://maven.fabricmc.net/net/fabricmc/fabric-installer/0.5.2.40/fabric-installer-0.5.2.40.jar && \
+    java -jar fabric-installer.jar server -downloadMinecraft
 
 RUN mkdir /minecraft/plugins && mkdir /world
 
