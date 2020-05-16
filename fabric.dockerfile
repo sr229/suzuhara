@@ -9,7 +9,7 @@ ARG version=0.5.2.40
 LABEL maintainer="Ayane Satomi <chinodesuuu@gmail.com>"
 
 RUN apt update && \
-    apt -y install --no-install-recommends openjdk-11-jre-headless openjdk-11-jdk-headless wget
+    apt -y install default-jdk-headless wget
 
 RUN mkdir /minecraft
 
