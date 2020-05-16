@@ -1,4 +1,4 @@
-name: Docker
+name: DockerHub
 
 on:
   push:
@@ -34,11 +34,11 @@ jobs:
         run: docker build . --file fabric.dockerfile --tag $IMAGE_NAME
 
       - name: Log into registry
-        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
+        run: echo "${{ secrets.DOCKER_TOKEN }}" | docker login docker.pkg.github.com -u ${{ secrets.DOCKER_USER }} --password-stdin
 
-      - name: Push image
+      - name: Push image (DockerHub)
         run: |
-          IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/$IMAGE_NAME
+          IMAGE_ID=${{ secrets.DOCKER_USER }}/$IMAGE_NAME
           
           # Change all uppercase to lowercase
           IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
