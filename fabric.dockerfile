@@ -22,7 +22,9 @@ RUN wget https://maven.fabricmc.net/net/fabricmc/fabric-installer/${version}/fab
 RUN mkdir /world
 
 ADD mods ./
+ADD run ./
 
+ENTRYPOINT [ "dumb-init" ]
 # HACK: OpenJDK can't find fabric in its own shell so we'll need to invoke sh itself to do so
-CMD [ "dumb-init",  "sh -c",  "java ‑jar fabric-server-launch.jar nogui" ]
+CMD ["./run"]
 EXPOSE 25565
