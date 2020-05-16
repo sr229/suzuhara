@@ -3,7 +3,7 @@
 #This is advantageous in that it's better for plugin development
 #and fits well with the Docker approach
 #
-FROM debian:sid-slim
+FROM debian:10
 ARG version=0.5.2.40
 
 LABEL maintainer="Ayane Satomi <chinodesuuu@gmail.com>"
