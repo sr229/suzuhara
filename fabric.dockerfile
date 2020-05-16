@@ -16,11 +16,13 @@ RUN mkdir /minecraft
 WORKDIR /minecraft
 
 RUN wget https://maven.fabricmc.net/net/fabricmc/fabric-installer/${version}/fabric-installer-${version}.jar && \
-    java -jar fabric-installer-${version}.jar server -downloadMinecraft
+    java -jar fabric-installer-${version}.jar server -downloadMinecraft && \
+    echo "eula=true" > eula.txt
 
 RUN mkdir /world
 
 ADD mods ./
 
-CMD java ‑jar /minecraft/fabric-server-launch.jar nogui
+# HACK: OpenJDK can't find fabric in its own shell so we'll need to invoke sh itself to do so
+CMD sh -c "java ‑jar fabric-server-launch.jar nogui"
 EXPOSE 25565
