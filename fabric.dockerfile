@@ -21,8 +21,10 @@ RUN wget https://maven.fabricmc.net/net/fabricmc/fabric-installer/${version}/fab
 
 RUN mkdir /world
 
-ADD mods ./
-ADD run ./
+ADD mods .
+ADD run .
+#FIXME: Until we figure out how to mount single files in ConfigMap, we will be using this.
+ADD server.properties .
 
 CMD [ "./run" ]
 EXPOSE 25565
