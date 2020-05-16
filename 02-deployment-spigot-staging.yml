@@ -6,26 +6,26 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: spigot-suzuhara-deployment
+  name: spigot-suzuhara-beta-deployment
   labels:
-    app: spigot-suzuhara
+    app: spigot-suzuhara-beta
     namespace: minecraft
     annotations:
       mc.suzuhara.moe/deployment: minecraft
-      mc.suzuhara.moe/stage: stable
+      mc.suzuhara.moe/stage: beta
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: spigot-suzuhara
+      app: spigot-suzuhara-beta
   template:
     metadata:
       labels:
-        app: spigot-suzuhara
+        app: spigot-suzuhara-beta
     spec:
       containers:
-      - name: spigot-suzuhara
-        image: chinodesuuuu/suzuhara-mc:v1.0.0
+      - name: spigot-suzuhara-beta
+        image: chinodesuuuu/suzuhara-mc:beta
         ports:
         - containerPort: 25565
     volumes:
@@ -39,14 +39,14 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: spigot-suzuhara-service
+  name: spigot-suzuhara-beta-service
   namespace: minecraft
   annotations:
      mc.suzuhara.moe/deployment: minecraft
-     mc.suzuhara.moe/stage: stable
+     mc.suzuhara.moe/stage: beta
 spec:
   selector:
-    app: spigot-suzuhara
+    app: spigot-suzuhara-beta
   ports:
     - protocol: TCP
       port: 25565
@@ -55,7 +55,7 @@ spec:
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: spigot-suzuhara-ingress
+  name: spigot-suzuhara-beta-ingress
   namespace: minecraft
   annotations:
     kubernetes.io/ingress.class: traefik
@@ -66,5 +66,5 @@ spec:
        paths:
          - path: /
            backend:
-             serviceName: spigot-suzuhara-service
+             serviceName: spigot-suzuhara-beta-service
              servicePort: 25565

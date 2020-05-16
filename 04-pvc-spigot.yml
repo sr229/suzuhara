@@ -1,0 +1,41 @@
+# Copyright 2020 (c) Ayane Satomi
+# Published under CC0-Universal.
+#
+#
+# Keep in mind this configuration is domain-specific, some things may not work in your end.
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: world-pv-data
+  namespace: minecraft
+  labels:
+    name: world-data
+    type: longhorn
+spec:
+  capacity:
+    storage: 50G
+  volumeMode: Filesystem
+  storageClassName: longhorn
+  accessModes:
+    - ReadWriteMany
+  csi:
+    driver: io.rancher.longhorn
+    fsType: ext4
+    volumeAttributes:
+      numberOfReplicates: '4'
+      staleReplicaTimeout: '20'
+    volumeHandle: world-data
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: world-pvc
+  labels:
+    type: longhorn
+spec:
+  storageClassName: longhorn
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 50Gi
