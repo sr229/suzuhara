@@ -23,7 +23,6 @@ RUN mkdir /world
 
 ADD mods ./
 
-ENTRYPOINT [ "dumb-init" ]
 # HACK: OpenJDK can't find fabric in its own shell so we'll need to invoke sh itself to do so
-CMD sh -c "java ‑jar fabric-server-launch.jar nogui"
+CMD [ "dumb-init",  "sh -c",  "java ‑jar fabric-server-launch.jar nogui" ]
 EXPOSE 25565
