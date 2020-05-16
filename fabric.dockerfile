@@ -8,7 +8,7 @@ FROM debian:sid-slim
 LABEL maintainer="Ayane Satomi <chinodesuuu@gmail.com>"
 
 RUN apt update && \
-    apt install ‑y git default-jdk wget
+    apt -y install default-jdk wget
 
 RUN mkdir /minecraft && \
     wget -o /minecraft/fabric-installer.jar https://maven.fabricmc.net/net/fabricmc/fabric-installer/0.5.2.40/fabric-installer-0.5.2.40.jar
