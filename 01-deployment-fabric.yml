@@ -26,17 +26,18 @@ spec:
         ports:
         - containerPort: 25565
         volumeMounts:
-        - name: mc-config
-          mountPath: /minecraft/server.properties
         - name: world-pvc
           mountPath: /world
+        - name: mc-config
+          mountPath: /minecraft/server.properties
+          subPath: server.properties
       volumes:
-      - name: mc-config
-        configMap:
-          name: fabric-suzuhara-config
       - name: world-pvc
         persistentVolumeClaim:
           claimName: world-pvc
+      - name: mc-config
+        configMap:
+          name: fabric-suzuhara-config
 ---
 apiVersion: v1
 kind: Service
