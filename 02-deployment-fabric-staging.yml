@@ -36,8 +36,7 @@ spec:
         - name: world-pvc
           mountPath: /world
         - name: mc-config
-          mountPath: /minecraft/server.properties
-          subPath: server.properties
+          mountPath: /etc/minecraft/config/
       volumes:
       - name: world-pvc
         persistentVolumeClaim:

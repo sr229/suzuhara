@@ -1,3 +1,10 @@
 #!/bin/sh
 
+if [ ! -z  $(ls /etc/minecraft/config) ]; then
+   echo "Kubernetes Minecraft Configuration found. Copying over..."
+   cp -vRf /etc/minecraft/config /minecraft
+else
+   echo "No configuration found, using default settings."
+fi
+
 dumb-init sh -c "java -jar ./fabric-server-launch.jar"
