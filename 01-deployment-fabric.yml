@@ -64,7 +64,7 @@ metadata:
     kubernetes.io/ingress.class: traefik
 spec:
   rules:
-  - host: m0.puffy-kubestg.ml
+  - host: m0test.suzuhara.moenet.internal
     http:
        paths:
          - path: /
