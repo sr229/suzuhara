@@ -17,7 +17,7 @@ WORKDIR /minecraft
 
 
 RUN curl -OJ https://meta.fabricmc.net/v2/versions/loader/${minecraft_version}/${version}/${installer_version}/server/jar && \
-    echo "eula=true" > eula.txt && \
+    echo "eula=true" > eula.txt
 
 RUN mkdir /world
 
