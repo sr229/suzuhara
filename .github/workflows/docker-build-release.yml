@@ -15,15 +15,24 @@ env:
   IMAGE_NAME: suzuhara-mc
 
 jobs:
+  test:
+     runs-on: ubuntu-latest
+     steps:
+      - uses: actions/checkout@v2
+      - name: Build image
+        run: |
+          docker buildx create --use
+          docker buildx build --platform linux/amd64,linux/arm64 --tag my-image-name:$(date +%s) -f fabric.dockerfile .
+        
   # Push image to GitHub Packages.
   # See also https://docs.docker.com/docker-hub/builds/
   push:
+    needs: test
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
 
     steps:
       - uses: actions/checkout@v2
-
       - name: Build and Push image
         run: |
           IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/$IMAGE_NAME
@@ -44,6 +53,6 @@ jobs:
           echo VERSION=$VERSION
 
           echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
-          
+
           docker buildx create --use
           docker buildx build --platform linux/amd64,linux/arm64 -t $IMAGE_ID:$VERSION -f fabric.dockerfile --push .
