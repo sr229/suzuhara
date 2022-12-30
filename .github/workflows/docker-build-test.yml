@@ -17,4 +17,4 @@ jobs:
     - name: Build image
       run: |
         docker buildx create --use
-        docker buildx build --platform linux/amd64,linux/arm64 -t $IMAGE_NAME -f fabric.dockerfile --push .
+        docker buildx build --platform linux/amd64,linux/arm64 --tag my-image-name:$(date +%s) -f fabric.dockerfile .
