@@ -25,4 +25,4 @@ ADD server.properties .
 
 ENTRYPOINT [ "dumb-init" ]
 CMD [ "./run" ]
-EXPOSE 25565
+EXPOSE 25565, 25575
