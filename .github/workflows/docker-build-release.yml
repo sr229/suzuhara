@@ -24,9 +24,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Log into registry
-        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
-
       - name: Build and Push image
         run: |
           IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/$IMAGE_NAME
@@ -46,5 +43,7 @@ jobs:
           echo IMAGE_ID=$IMAGE_ID
           echo VERSION=$VERSION
 
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
+          
           docker buildx create --use
           docker buildx build --platform linux/amd64,linux/arm64 -t $IMAGE_ID:$VERSION -f fabric.dockerfile --push .
