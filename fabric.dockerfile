@@ -7,9 +7,8 @@ ARG installer_version=0.11.1
 LABEL maintainer="Ayane Satomi <chinodesuuu@gmail.com>"
 
 RUN apt update && \
-    apt -y install curl dumb-init && \
-    apt clean && \
-    rm -rfv /var/cache/apt/;
+    apt -y install dumb-init && \
+    apt clean
 
 RUN mkdir /minecraft
 
