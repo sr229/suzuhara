@@ -6,7 +6,7 @@ ARG installer_version=0.11.1
 
 LABEL maintainer="Ayane Satomi <chinodesuuu@gmail.com>"
 
-RUN apk add --no-cache curl dumb-init openjdk11-jre
+RUN apk add --no-cache curl dumb-init openjdk17-jre-headless
 
 RUN mkdir /minecraft
 
@@ -23,6 +23,6 @@ ADD run .
 # Prepopulate Server.properties with a default config. This can be overriden later on with a configmap mount.
 ADD server.properties .
 
-ENTRYPOINT [ "./run" ]
-CMD [ "java", "-Xmx2G",  "-jar", "./fabric-server-mc.${minecraft_version}-loader.${version}-launcher.${installer_version}.jar", "nogui" ]
+ENTRYPOINT [ "dumb-init" ]
+CMD [ "./run" ]
 EXPOSE 25565

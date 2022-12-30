@@ -11,4 +11,4 @@ else
    echo "No configuration found, using default settings."
 fi
 
-dumb-init sh -c $1
+/bin/sh -c "java -Xmx2G -jar ./fabric-server-mc.${minecraft_version}-loader.${version}-launcher.${installer_version}.jar nogui"
