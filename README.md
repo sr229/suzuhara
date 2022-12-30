@@ -23,5 +23,3 @@ If this satisfies our conditions, then you are free to commit away your prebuilt
 ## Copyright + Disclaimer
 
 This configuration is Copyright &copy; Ayane Satomi. Licensed under CC0-Universal.
-
-Suzuhara is Suzuhara Lulu of Nijisanji. Ayane Satomi is not affiliated with Suzuhara Lulu or Nijisanji.
