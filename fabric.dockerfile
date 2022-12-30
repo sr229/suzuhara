@@ -23,6 +23,7 @@ ADD run .
 # Prepopulate Server.properties with a default config. This can be overriden later on with a configmap mount.
 ADD server.properties .
 
+VOLUME /minecraft/suzuhara
+EXPOSE 25565 25575
 ENTRYPOINT [ "dumb-init" ]
 CMD [ "./run" ]
-EXPOSE 25565 25575
