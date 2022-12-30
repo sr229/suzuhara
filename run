@@ -1,5 +1,9 @@
 #!/bin/sh
 
+version=0.14.12
+minecraft_version=1.18.2
+installer_version=0.11.1
+
 if [ ! -z  $(ls /etc/minecraft/config) ]; then
    echo "Kubernetes Minecraft Configuration found. Copying over..."
    cp -vRf /etc/minecraft/config /minecraft
@@ -7,4 +11,4 @@ else
    echo "No configuration found, using default settings."
 fi
 
-dumb-init sh -c "java -jar ./fabric-server-launch.jar"
+dumb-init sh -c "java -Xmx2G  -jar ./fabric-server-mc.${minecraft_version}-loader.${version}-launcher.${installer_version}.jar"
